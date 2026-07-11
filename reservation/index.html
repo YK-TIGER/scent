@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>방탈출 예약</title>
+
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📅 방탈출 예약</h1>
+
+        <p class="subtitle">
+            원하는 시간을 선택하여 예약해주세요.
+        </p>
+
+        <div class="form-card">
+
+            <label for="time">예약 시간</label>
+            <select id="time"></select>
+
+            <label for="name">이름</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="이름을 입력하세요"
+                maxlength="20"
+                autocomplete="off">
+
+            <label for="student">학번</label>
+            <input
+                type="text"
+                id="student"
+                placeholder="예) 24015"
+                maxlength="5"
+                inputmode="numeric"
+                autocomplete="off"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+            <label for="phone">전화번호</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="01012345678"
+                maxlength="11"
+                inputmode="numeric"
+                autocomplete="tel"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                        
+
+            <label for="people">인원</label>
+            <select id="people">
+                <option value="1">1명</option>
+                <option value="2">2명</option>
+                <option value="3">3명</option>
+                <option value="4">4명</option>
+            </select>
+
+        </div>
+
+        <button onclick="reserve()">
+            예약하기
+        </button>
+
+        <div id="result"></div>
+
+        <div class="button-group">
+
+            <button type="button" onclick="location.href='../'">
+                🏠 메인
+            </button>
+
+            <button type="button" onclick="location.href='../list/'">
+                📋 예약자 명단
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

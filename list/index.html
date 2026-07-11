@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>예약자 명단</title>
+
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📋 예약자 명단</h1>
+
+        <p class="subtitle">
+            현재 방탈출 예약 현황입니다.
+        </p>
+
+        <div class="summary">
+
+            <div class="summary-card">
+
+                <h3>예약 팀</h3>
+
+                <span id="teamCount">
+                    0팀
+                </span>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h3>총 인원</h3>
+
+                <span id="peopleCount">
+                    0명
+                </span>
+
+            </div>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>예약 시간</th>
+                    <th>이름</th>
+                    <th>학번</th>
+                    <th>인원</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tableBody">
+
+            </tbody>
+
+        </table>
+
+        <div class="button-group">
+
+            <button type="button" onclick="location.href='../'">
+                🏠 메인
+            </button>
+
+            <button type="button" onclick="location.href='../reservation/'">
+                📅 예약하기
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
