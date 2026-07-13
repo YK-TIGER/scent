@@ -58,6 +58,7 @@ async function loadReserved() {
 
     try {
 
+        // 초기화
         [...select.options].forEach(option => {
 
             option.disabled = false;
@@ -69,15 +70,41 @@ async function loadReserved() {
 
         const reserved = await response.json();
 
+        // 시간별 예약 인원 계산
+        const countMap = {};
+
         reserved.forEach(row => {
 
-            const option =
-                [...select.options].find(o => o.value === row[0]);
+            const time = row[0];
+            const people = Number(row[4]);
 
-            if (option) {
+            countMap[time] =
+                (countMap[time] || 0) + people;
+
+        });
+
+        // 표시
+        Object.keys(countMap).forEach(time => {
+
+            const option =
+                [...select.options].find(o => o.value === time);
+
+            if (!option) return;
+
+            const count = countMap[time];
+
+            if (count >= 5) {
 
                 option.disabled = true;
-                option.textContent = `${row[0]} (예약완료)`;
+                option.textContent =
+                    `${time} (5/5 예약마감)`;
+
+            }
+
+            else {
+
+                option.textContent =
+                    `${time} (${count}/5)`;
 
             }
 
@@ -101,10 +128,10 @@ async function reserve() {
     const time = document.getElementById("time").value;
     const name = document.getElementById("name").value.trim();
     const student = document.getElementById("student").value.trim();
-    const people = document.getElementById("people").value;
     const phone = document.getElementById("phone").value.trim();
+    const people = document.getElementById("people").value;
 
-    // 이름
+    // 이름 검사
     if (name === "") {
 
         alert("이름을 입력해주세요.");
@@ -112,7 +139,7 @@ async function reserve() {
 
     }
 
-    // 학번
+    // 학번 검사
     if (!/^\d{5}$/.test(student)) {
 
         alert("학번은 5자리 숫자로 입력해주세요.");
@@ -120,13 +147,14 @@ async function reserve() {
 
     }
 
+    // 전화번호 검사
     if (!/^01\d{8,9}$/.test(phone)) {
 
-    alert("전화번호를 올바르게 입력해주세요.");
-
-    return;
+        alert("전화번호를 올바르게 입력해주세요.");
+        return;
 
     }
+
     const button = document.querySelector("button");
 
     button.disabled = true;
@@ -151,6 +179,7 @@ async function reserve() {
         });
 
         const result = await response.text();
+
         console.log(result);
 
         switch (result) {
@@ -175,23 +204,28 @@ async function reserve() {
 
                 break;
 
-            case "duplicate_time":
+            case "duplicate_student":
 
-                alert("이미 예약된 시간입니다.");
+                alert("이미 예약한 학번입니다.");
+                break;
+
+            case "full":
+
+                alert("해당 시간은 정원(5명)이 모두 찼습니다.");
 
                 await loadReserved();
 
                 break;
 
-            case "duplicate_student":
+            case "invalid":
 
-                alert("이미 예약한 학번입니다.");
-
+                alert("입력값이 올바르지 않습니다.");
                 break;
 
             default:
 
                 alert("예약에 실패했습니다.");
+                console.log(result);
 
         }
 
