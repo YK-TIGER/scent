@@ -6,8 +6,8 @@ const API = "https://script.google.com/macros/s/AKfycbyt3GrabbJGEzYada4aUKKCQcjs
 // ==========================
 // 예약 시간 설정
 // ==========================
-const START_HOUR = 9;
-const END_HOUR = 11;
+const START_HOUR = 8;
+const END_HOUR = 12;
 const INTERVAL = 10;
 
 // ==========================
