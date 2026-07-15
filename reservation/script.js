@@ -211,7 +211,15 @@ async function reserve() {
 
             case "full":
 
-                alert("해당 시간은 정원(5명)이 모두 찼습니다.");
+                alert("해당 시간은 5명이 모두 예약하여 마감되었습니다.");
+
+                await loadReserved();
+
+                break;
+
+            case "event_full":
+
+                alert("향수공방 예약이 모두 마감되었습니다.");
 
                 await loadReserved();
 
